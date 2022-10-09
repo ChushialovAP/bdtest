@@ -43,7 +43,7 @@ export class AppGateway
   @SubscribeMessage('message:post')
   async handleMessagePost(
     @MessageBody()
-    payload: // { userId: string, userName: string, text: string }
+    payload: // { userId: string, text: string }
     Prisma.MessageUncheckedCreateInput,
   ): Promise<void> {
     const createdMessage = await this.appService.createMessage(payload);
