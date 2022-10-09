@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Message, Prisma } from '@prisma/client';
 import { MessageUpdatePayload } from 'types';
-import { PrismaService } from './prisma.service';
+import { PrismaService } from './prisma/prisma.service';
 
 @Injectable()
 export class AppService {
