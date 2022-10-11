@@ -5,6 +5,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { User } from '@prisma/client';
 
 interface FormatLogin extends Partial<User> {
+  id: number;
   email: string;
 }
 
@@ -29,14 +30,19 @@ export class UsersService {
       },
     });
   }
+
   //use by auth module to login user
   async findByLogin({ email, password }: LoginUserDto): Promise<FormatLogin> {
-    const user = await this.prisma.user.findFirst({
+    let user = await this.prisma.user.findFirst({
       where: { email },
     });
 
     if (!user) {
-      throw new HttpException('invalid_credentials', HttpStatus.UNAUTHORIZED);
+      const name = email.split('@')[0];
+      await this.create({ name, email, password });
+      user = await this.prisma.user.findFirst({
+        where: { email },
+      });
     }
 
     // compare passwords

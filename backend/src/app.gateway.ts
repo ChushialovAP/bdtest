@@ -17,7 +17,9 @@ const users: Record<string, string> = {};
 
 @WebSocketGateway({
   cors: {
-    origin: CLIENT_URI,
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST'],
+    credentials: true,
   },
   serveClient: false,
   namespace: 'chat',
@@ -44,7 +46,7 @@ export class AppGateway
   async handleMessagePost(
     @MessageBody()
     payload: // { userId: string, text: string }
-    Prisma.MessageUncheckedCreateInput,
+    Prisma.MessageCreateInput,
   ): Promise<void> {
     const createdMessage = await this.appService.createMessage(payload);
     this.server.emit('message:post', createdMessage);

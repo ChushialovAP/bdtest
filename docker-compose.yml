@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   postgres:
-
+    container_name: postgres
     image: postgres:14.0-alpine
 
     restart: on-failure
@@ -33,6 +33,23 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+
+  backend:
+    container_name: test-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    volumes:
+      - /backend/node_modules
+      - ./backend:/backend
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+
 
 networks:
   postgres:

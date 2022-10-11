@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto, LoginUserDto } from '../users/users.user.dto';
 import { JwtPayload } from './jwt.strategy';
 import { PrismaService } from '../prisma/prisma.service';
-import { User } from '@prisma/client';
+import { Message, User } from '@prisma/client';
 import { hash } from 'bcrypt';
 import { jwtConstants } from './constants';
 // import {User} from "../users/user.entity";
@@ -47,8 +47,8 @@ export class AuthService {
     };
   }
 
-  private _createToken({ email }): any {
-    const user: JwtPayload = { email };
+  private _createToken({ id, email }): any {
+    const user: JwtPayload = { id, email };
     const Authorization = this.jwtService.sign(user);
     return {
       expiresIn: jwtConstants.expiresIn,

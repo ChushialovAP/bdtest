@@ -19,7 +19,7 @@ export class AppService {
   }
 
   // создание сообщения
-  async createMessage(data: Prisma.MessageUncheckedCreateInput) {
+  async createMessage(data: Prisma.MessageCreateInput) {
     return this.prisma.message.create({ data });
   }
 
