@@ -34,21 +34,21 @@ services:
       - postgres
     restart: unless-stopped
 
-  backend:
-    container_name: test-backend
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    depends_on:
-      - postgres
-    restart: unless-stopped
-    volumes:
-      - /backend/node_modules
-      - ./backend:/backend
-    ports:
-      - "3001:3001"
-    env_file:
-      - .env
+  # backend:
+  #   container_name: test-backend
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - postgres
+  #   restart: unless-stopped
+  #   volumes:
+  #     - /backend/node_modules
+  #     - ./backend:/backend
+  #   ports:
+  #     - "3001:3001"
+  #   env_file:
+  #     - .env
 
 
 networks:

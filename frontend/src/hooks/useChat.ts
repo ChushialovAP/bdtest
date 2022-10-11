@@ -2,7 +2,8 @@ import jwtDecode from "jwt-decode";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { io, Socket } from "Socket.IO-client";
 import { SERVER_URI } from "../constants";
-import { Message, MessageWhereUniqueInput, MessageCreateInput, UserInfo } from "../types";
+import { Prisma, Message } from "@prisma/client"
+import { UserInfo } from "../types";
 
 // экземпляр сокета
 let socket: Socket;
@@ -40,12 +41,12 @@ export const useChat = () => {
   }, []);
 
   // отправка сообщения
-  const send = useCallback((payload: MessageCreateInput) => {
+  const send = useCallback((payload: Prisma.MessageCreateInput) => {
     socket.emit("message:post", payload);
   }, []);
 
   // удаление сообщения
-  const remove = useCallback((payload: MessageWhereUniqueInput) => {
+  const remove = useCallback((payload: Prisma.MessageWhereUniqueInput) => {
     socket.emit("message:delete", payload);
   }, []);
 

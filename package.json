@@ -1,0 +1,22 @@
+{
+  "name": "my-prisma-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:client": "yarn --cwd frontend dev",
+    "dev:server": "yarn --cwd backend start",
+    "dev": "concurrently \"yarn dev:client\" \"yarn dev:server\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prisma": "^4.4.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.4.0",
+    "concurrently": "^7.4.0"
+  }
+}

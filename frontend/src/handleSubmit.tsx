@@ -10,7 +10,7 @@ export const handleSubmit = (email: string, pass: string) => {
 
     axios.post("http://localhost:3001/auth/login", loginPayload)
     .then(response => {
-        window.alert("asd");
+        window.alert("")
         //get token from response
         const token  =  response.data.Authorization;
         console.log(token);
@@ -22,10 +22,10 @@ export const handleSubmit = (email: string, pass: string) => {
         setAuthToken(token);
 
         //redirect user to home page
-        //location.reload()
+        location.reload()
     })
     .catch(err => console.log(err));
-    window.alert("asd");
+    window.alert("")
 };
 
 export const setAuthToken = (token: string) => {

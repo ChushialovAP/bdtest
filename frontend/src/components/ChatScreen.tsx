@@ -1,12 +1,13 @@
-import jwtDecode from "jwt-decode";
+import jwt, { JwtPayload } from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { FiEdit2, FiSend, FiTrash } from "react-icons/fi";
 import { MdOutlineClose } from "react-icons/md";
 import TimeAgo from "react-timeago";
 import { Slide, toast, ToastContainer } from "react-toastify";
 import { useChat } from "../hooks/useChat";
-import { UserInfo } from "../types";
-import { User } from '@prisma/client'
+import { JwtPayloadN, UserInfo } from "../types";
+import { Prisma, User } from '@prisma/client'
+import jwtDecode from "jwt-decode";
 
 // уведомление о подключении/отключении пользователя
 const notify = (message: string) =>
@@ -19,9 +20,12 @@ const notify = (message: string) =>
 
 export const ChatScreen = () => {
   const token = localStorage.getItem("token")!;
-  const userInfo = jwtDecode<UserInfo>(token);
-  const { uid, userName } = userInfo;
-  const userId = uid;
+  // const userInfo = JSON.parse(token);
+  const decode =jwtDecode<JwtPayloadN>(token);
+  //window.alert(userInfo.uid as number);
+  console.log(decode);
+  const email = decode.email;
+  const id = decode.id;
 
   // получаем сообщения, лог и операции
   const { messages, log, chatActions } = useChat();
@@ -43,10 +47,18 @@ export const ChatScreen = () => {
     if (!trimmed) return;
 
     const mesL =messages?.length;
-    const id = mesL ? mesL + 1 : 1;
+    setEditingMessageId(mesL ? mesL + 1 : 1);
+
+    const connect: Prisma.UserWhereUniqueInput = {
+      email,
+    }
+
+    const user: Prisma.UserCreateNestedOneWithoutMessagesInput = {
+      connect,
+    }
+
     const message = {
-      userId,
-      userName,
+      user,
       text
     };
 
@@ -83,7 +95,7 @@ export const ChatScreen = () => {
           messages.length > 0 &&
           messages.map((message) => {
             // определяем принадлежность сообщения пользователю
-            const isMsgBelongsToUser = message.userId === userInfo.uid;
+            const isMsgBelongsToUser = message.userId === id;
 
             return (
               <div
