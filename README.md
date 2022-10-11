@@ -1,7 +1,7 @@
 ![test](https://user-images.githubusercontent.com/45356689/195144705-8e328c75-df8c-47e9-b0c1-8166a6b24a52.gif)
 
 задача на рефакторинг:
-
+```
 function func(s, a, b) {
   if (!s) {
     return -1;
@@ -26,3 +26,4 @@ function func(s, a, b) {
     return -1;
   }
 }
+```
