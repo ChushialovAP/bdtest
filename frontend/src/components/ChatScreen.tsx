@@ -45,7 +45,7 @@ export const ChatScreen = () => {
     const trimmed = text.trim();
     if (!trimmed) return;
 
-    const mesL =messages?.length;
+    const mesL = messages?.length;
     setEditingMessageId(mesL ? mesL + 1 : 1);
 
     const connect: Prisma.UserWhereUniqueInput = {
@@ -110,7 +110,7 @@ export const ChatScreen = () => {
                   editingState ? "bg-gray-300" : ""
                 ].join(" ")}
               >
-                <div className="flex justify-between text-sm mb-1">
+                <div className="flex jusify-between text-sm mb-1">
                   <p>
                     By <span>{message.userId}</span>
                   </p>

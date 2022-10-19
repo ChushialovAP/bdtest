@@ -1,6 +1,6 @@
 export type UserInfo = {
   uid: number;
-  userName: string;
+  email: string;
 };
 
 // export type MessageWhereUniqueInput = {

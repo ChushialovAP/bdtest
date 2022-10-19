@@ -11,14 +11,14 @@ let socket: Socket;
 export const useChat = () => {
   const token = localStorage.getItem("token")!;
   const userInfo = jwtDecode<UserInfo>(token);
-  const { uid, userName } = userInfo;
+  const { uid, email } = userInfo;
+  console.log(userInfo);
 
   // это важно: один пользователь - один сокет
   if (!socket) {
     socket = io(SERVER_URI, {
-      // помните сигнатуру объекта `handshake` на сервере?
       query: {
-        userName: userInfo.userName
+        email: email
       }
     });
   }

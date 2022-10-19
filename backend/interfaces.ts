@@ -10,3 +10,8 @@ export interface RegistrationSeederStatus {
   message: string;
   data?: User[];
 }
+
+export interface JwtPayload {
+  id: number;
+  email: string;
+}

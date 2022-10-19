@@ -1,3 +1,4 @@
+import { UseGuards } from '@nestjs/common';
 import {
   MessageBody,
   OnGatewayConnection,
@@ -11,6 +12,7 @@ import { Prisma } from '@prisma/client';
 import { Server, Socket } from 'Socket.IO';
 import { MessageUpdatePayload } from 'types';
 import { AppService } from './app.service';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
 const users: Record<string, string> = {};
 
@@ -30,17 +32,20 @@ export class AppGateway
 
   @WebSocketServer() server: Server;
 
+  //@UseGuards(JwtAuthGuard)
   @SubscribeMessage('messages:get')
   async handleMessagesGet(): Promise<void> {
     const messages = await this.appService.getMessages();
     this.server.emit('messages', messages);
   }
 
+  //@UseGuards(JwtAuthGuard)
   @SubscribeMessage('messages:clear')
   async handleMessagesClear(): Promise<void> {
     await this.appService.clearMessages();
   }
 
+  //@UseGuards(JwtAuthGuard)
   @SubscribeMessage('message:post')
   async handleMessagePost(
     @MessageBody()
@@ -52,6 +57,7 @@ export class AppGateway
     this.handleMessagesGet();
   }
 
+  //@UseGuards(JwtAuthGuard)
   @SubscribeMessage('message:put')
   async handleMessagePut(
     @MessageBody()
@@ -63,6 +69,7 @@ export class AppGateway
     this.handleMessagesGet();
   }
 
+  //@UseGuards(JwtAuthGuard)
   @SubscribeMessage('message:delete')
   async handleMessageDelete(
     @MessageBody()
@@ -79,18 +86,20 @@ export class AppGateway
   }
 
   handleConnection(client: Socket, ...args: any[]) {
-    const userName = client.handshake.query.userName as string;
+    console.log(client);
+    console.log(client.handshake.query);
+    const email = client.handshake.query.email as string;
     const socketId = client.id;
-    users[socketId] = userName;
+    users[socketId] = email;
 
-    client.broadcast.emit('log', `${userName} connected`);
+    client.broadcast.emit('log', `${email} connected`);
   }
 
   handleDisconnect(client: Socket) {
     const socketId = client.id;
-    const userName = users[socketId];
+    const email = users[socketId];
     delete users[socketId];
 
-    client.broadcast.emit('log', `${userName} disconnected`);
+    client.broadcast.emit('log', `${email} disconnected`);
   }
 }
