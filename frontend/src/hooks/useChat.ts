@@ -2,7 +2,7 @@ import jwtDecode from "jwt-decode";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { io, Socket } from "Socket.IO-client";
 import { SERVER_URI } from "../constants";
-import { Prisma, Message } from "@prisma/client"
+import { Prisma, Message } from "../../../node_modules/@prisma/client"
 import { UserInfo } from "../types";
 
 // экземпляр сокета

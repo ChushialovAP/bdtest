@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FiUser } from "react-icons/fi";
 import { handleSubmit } from "../handleSubmit";
-import { UserInfo } from "../types";
 
 export const WelcomeScreen = () => {
   const [email, setEmail] = useState("");

@@ -4,14 +4,9 @@ import {
   HttpException,
   HttpStatus,
   Post,
-  UseGuards,
-  UseInterceptors,
 } from '@nestjs/common';
-import {
-  AuthService,
-  RegistrationSeederStatus,
-  RegistrationStatus,
-} from './auth.service';
+import { AuthService } from './auth.service';
+import { RegistrationStatus } from 'interfaces';
 import { CreateUserDto, LoginUserDto } from '../users/users.user.dto';
 import { ApiTags } from '@nestjs/swagger';
 

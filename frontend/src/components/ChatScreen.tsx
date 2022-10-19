@@ -1,12 +1,11 @@
-import jwt, { JwtPayload } from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { FiEdit2, FiSend, FiTrash } from "react-icons/fi";
 import { MdOutlineClose } from "react-icons/md";
 import TimeAgo from "react-timeago";
 import { Slide, toast, ToastContainer } from "react-toastify";
 import { useChat } from "../hooks/useChat";
-import { JwtPayloadN, UserInfo } from "../types";
-import { Prisma, User } from '@prisma/client'
+import { JwtPayloadN } from "../interfaces";
+import { Prisma } from '@prisma/client'
 import jwtDecode from "jwt-decode";
 
 // уведомление о подключении/отключении пользователя

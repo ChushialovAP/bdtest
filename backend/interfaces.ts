@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { User } from '../node_modules/@prisma/client';
 
 export interface RegistrationStatus {
   success: boolean;
