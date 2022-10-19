@@ -4,9 +4,8 @@ import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto, LoginUserDto } from '../users/users.user.dto';
 import { JwtPayload } from './jwt.strategy';
 import { PrismaService } from '../prisma/prisma.service';
-import { Message, User } from '@prisma/client';
-import { hash } from 'bcrypt';
 import { jwtConstants } from './constants';
+import { RegistrationStatus } from 'interfaces';
 // import {User} from "../users/user.entity";
 
 @Injectable()
@@ -63,15 +62,4 @@ export class AuthService {
     }
     return user;
   }
-}
-
-export interface RegistrationStatus {
-  success: boolean;
-  message: string;
-  data?: User;
-}
-export interface RegistrationSeederStatus {
-  success: boolean;
-  message: string;
-  data?: User[];
 }

@@ -3,7 +3,6 @@ backend/dist
 backend/node_modules
 .DS_Store
 pgdata
-.env
 /node_modules
 # Logs
 backend/logs

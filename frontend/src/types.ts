@@ -28,8 +28,3 @@ export type UserInfo = {
 //   id?: number
 //   email?: string
 // }
-
-export interface JwtPayloadN {
-  id: number;
-  email: string;
-}

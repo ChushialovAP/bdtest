@@ -1,7 +1,6 @@
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { ChatScreen, WelcomeScreen } from "./components";
-import { UserInfo } from "./types";
 
 function hasJWT() {
   let flag = false;

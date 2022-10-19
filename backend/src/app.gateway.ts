@@ -10,7 +10,6 @@ import {
 import { Prisma } from '@prisma/client';
 import { Server, Socket } from 'Socket.IO';
 import { MessageUpdatePayload } from 'types';
-import { CLIENT_URI } from '../constants';
 import { AppService } from './app.service';
 
 const users: Record<string, string> = {};
